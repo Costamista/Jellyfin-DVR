@@ -43,7 +43,7 @@ sudo ffmpeg -f concat -safe 0 -i "$CONCAT_FILE" \
     -vf 'format=nv12,hwupload,scale_vaapi=w=-2:h=1080' \
     -c:v hevc_vaapi \
     -qp 27 \
-    -c:a copy \
+    -c:a aac \
     "$OUTPUT_FILE"
 
 # Remove .ts files if ffmpeg was successful
