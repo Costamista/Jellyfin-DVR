@@ -6,7 +6,7 @@ if [ $# -ne 1 ]; then
     exit 1
 fi
 
-DIR_PATH="$1"
+DIR_PATH=$(dirname "$1")
 
 # Check if directory exists
 if [ ! -d "$DIR_PATH" ]; then
@@ -38,7 +38,7 @@ OUTPUT_NAME=$(basename "$DIR_PATH")
 OUTPUT_FILE="${DIR_PATH}/${OUTPUT_NAME}.mp4"
 
 # Merge files using ffmpeg with VAAPI
-sudo ffmpeg -f concat -safe 0 -i "$CONCAT_FILE" \
+/usr/lib/jellyfin-ffmpeg/ffmpeg -f concat -safe 0 -i "$CONCAT_FILE" \
     -vaapi_device /dev/dri/renderD128 \
     -vf 'format=nv12,hwupload,scale_vaapi=w=-2:h=1080' \
     -c:v hevc_vaapi \
